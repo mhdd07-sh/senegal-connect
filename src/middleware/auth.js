@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const logger = require('../config/logger');
 
+
 // Lit Authorization: Bearer <token>, vérifie le JWT, stocke le payload dans req.user.
 // Trois messages d'erreur distincts, comme exigé par le cahier des charges (M2).
 function verifierJWT(req, res, next) {
