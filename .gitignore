@@ -3,3 +3,4 @@ node_modules/
 logs/*.log
 uploads/*
 !uploads/.gitkeep
+scripts/
