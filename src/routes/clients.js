@@ -4,6 +4,7 @@ const { verifierValidation } = require('../utils/validation');
 const { verifierJWT, garderRole } = require('../middleware/auth');
 const controller = require('../controllers/clients.controller');
 
+
 const router = express.Router();
 
 const validationClient = [
