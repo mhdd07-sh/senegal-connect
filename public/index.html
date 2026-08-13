@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<title>Sénégal Connect — Connexion</title>
+<link rel="stylesheet" href="/css/app.css" />
+</head>
+<body class="page-connexion">
+
+  <div class="carte-connexion">
+    <div class="logo">
+      <span class="logo-marque">Sénégal</span><span class="logo-accent">Connect</span>
+    </div>
+    <p class="sous-titre">Espace support client</p>
+
+    <form id="formulaire-connexion">
+      <label>Email
+        <input type="email" id="champ-email" required autocomplete="username" placeholder="moussa.sow@example.sn" />
+      </label>
+      <label>Mot de passe
+        <input type="password" id="champ-mdp" required autocomplete="current-password" />
+      </label>
+      <button type="submit">Se connecter</button>
+      <p id="erreur-connexion" class="message-erreur" hidden></p>
+    </form>
+  </div>
+
+  <script src="/js/connexion.js"></script>
+</body>
+</html>

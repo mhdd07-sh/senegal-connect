@@ -1,0 +1,982 @@
+/* ============================================================================
+   Sénégal Connect — Interface de support client
+   Palette : nuit télécom + signal ambre (évoque un réseau qui "s'allume" la nuit)
+   ============================================================================ */
+
+:root {
+  --fond: #0b1220;
+  --fond-panneau: #101a2c;
+  --fond-carte: #16233a;
+  --bordure: #223049;
+  --texte: #e7ecf3;
+  --texte-attenue: #7e8ca3;
+  --accent: #e8a33d;
+  --accent-doux: rgba(232, 163, 61, 0.16);
+  --accent-texte: #1a1204;
+  --succes: #3ddc97;
+  --danger: #ef6a6a;
+  --rayon: 10px;
+  --police: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--police);
+  background: var(--fond);
+  color: var(--texte);
+}
+
+.ecran {
+  height: 100vh;
+  width: 100vw;
+}
+
+[hidden],
+.hidden {
+  display: none !important;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* ---- Page de connexion (index.html) ---- */
+body.page-connexion {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(232, 163, 61, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(61, 220, 151, 0.06), transparent 40%),
+    var(--fond);
+}
+
+.carte-connexion {
+  width: 100%;
+  max-width: 360px;
+  padding: 40px 36px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.logo-petit {
+  font-size: 1.1rem;
+}
+
+.logo-marque {
+  color: var(--texte);
+}
+
+.logo-accent {
+  color: var(--accent);
+}
+
+.sous-titre {
+  margin: 6px 0 28px;
+  color: var(--texte-attenue);
+  font-size: 0.9rem;
+}
+
+#formulaire-connexion label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.8rem;
+  color: var(--texte-attenue);
+}
+
+#formulaire-connexion input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 11px 12px;
+  background: var(--fond-panneau);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  color: var(--texte);
+  font-size: 0.95rem;
+}
+
+#formulaire-connexion input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+#formulaire-connexion button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: var(--accent);
+  color: var(--accent-texte);
+  border: none;
+  border-radius: var(--rayon);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.message-erreur {
+  margin-top: 14px;
+  padding: 10px 12px;
+  background: rgba(239, 106, 106, 0.12);
+  border: 1px solid rgba(239, 106, 106, 0.3);
+  border-radius: var(--rayon);
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* ---- Application principale (app.html) ---- */
+body.page-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--fond-panneau);
+  border-bottom: 1px solid var(--bordure);
+  flex-shrink: 0;
+}
+
+.info-utilisateur {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.badge-role {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-doux);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bouton-texte {
+  background: none;
+  border: none;
+  color: var(--texte-attenue);
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+.bouton-texte:hover {
+  color: var(--texte);
+}
+
+.corps {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ---- Panneau tickets ---- */
+.panneau-tickets {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--fond-panneau);
+  border-right: 1px solid var(--bordure);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panneau-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+}
+
+.panneau-entete h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.bouton-icone {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-doux);
+  color: var(--accent);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.formulaire-inline {
+  display: flex;
+  gap: 8px;
+  padding: 0 18px 14px;
+}
+
+.formulaire-inline input {
+  flex: 1;
+  padding: 8px 10px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  color: var(--texte);
+  font-size: 0.85rem;
+}
+
+.formulaire-inline button {
+  padding: 8px 14px;
+  background: var(--accent);
+  color: var(--accent-texte);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.liste-tickets {
+  list-style: none;
+  margin: 0;
+  padding: 0 8px 8px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.item-ticket {
+  padding: 12px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+}
+
+.item-ticket:hover {
+  background: var(--fond-carte);
+}
+
+.item-ticket.selectionne {
+  background: var(--accent-doux);
+  border-color: var(--accent);
+}
+
+.item-ticket .sujet {
+  font-size: 0.88rem;
+  display: block;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge-statut {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badge-statut.ouvert {
+  background: rgba(239, 106, 106, 0.15);
+  color: var(--danger);
+}
+
+.badge-statut.en_cours {
+  background: var(--accent-doux);
+  color: var(--accent);
+}
+
+.badge-statut.ferme {
+  background: rgba(61, 220, 151, 0.15);
+  color: var(--succes);
+}
+
+/* ---- Panneau chat ---- */
+.panneau-chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-vide {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--texte-attenue);
+  font-size: 0.9rem;
+}
+
+.chat-actif {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--bordure);
+  flex-shrink: 0;
+}
+
+.chat-entete h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.chat-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.bouton-secondaire {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.bouton-secondaire:disabled {
+  border-color: var(--bordure);
+  color: var(--texte-attenue);
+  cursor: not-allowed;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bulle {
+  position: relative;
+  max-width: 65%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.bulle.mienne {
+  align-self: flex-end;
+  background: var(--accent);
+  color: var(--accent-texte);
+  border-bottom-right-radius: 4px;
+}
+
+.bulle.autre {
+  align-self: flex-start;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-bottom-left-radius: 4px;
+}
+
+.bulle .horodatage {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  opacity: 0.7;
+}
+
+.coches {
+  margin-left: 6px;
+  letter-spacing: -1px;
+}
+
+.coches.lu {
+  color: #2d6cdf;
+  opacity: 1;
+  font-weight: 700;
+}
+
+.bulle img.piece-jointe {
+  max-width: 220px;
+  border-radius: 8px;
+  display: block;
+  margin-top: 4px;
+}
+
+.bulle a.piece-jointe {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.bulle.appel {
+  align-self: stretch;
+  max-width: 80%;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(232, 163, 61, 0.08);
+  border: 1px solid rgba(232, 163, 61, 0.18);
+  color: var(--texte);
+}
+
+.bulle.appel.appel-entrant {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.bulle.appel.appel-sortant {
+  align-self: flex-end;
+  background: rgba(232, 163, 61, 0.16);
+}
+
+.bulle.appel.appel-initie {
+  border-color: rgba(239, 106, 106, 0.3);
+}
+
+.bulle.appel.appel-refuse {
+  border-color: rgba(239, 106, 106, 0.42);
+}
+
+.bulle.appel .appel-entete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.bulle.appel .appel-icone {
+  font-size: 1.1rem;
+}
+
+.bulle.appel .appel-texte-principal {
+  font-size: 0.95rem;
+}
+
+.bulle.appel .appel-sous-titre {
+  color: var(--texte-attenue);
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+}
+
+.bulle.appel .appel-bas {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--texte);
+  margin-bottom: 6px;
+}
+
+.bulle.appel .appel-duree {
+  color: var(--texte);
+}
+
+.bulle.appel .appel-heure {
+  color: var(--texte-attenue);
+}
+
+.bulle.appel .appel-meta {
+  font-size: 0.78rem;
+  color: var(--texte-attenue);
+}
+
+/* ---- Réactions émoji ---- */
+.barre-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.pastille-reaction {
+  padding: 1px 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: inherit;
+}
+
+.bouton-reagir {
+  padding: 1px 6px;
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  color: inherit;
+  opacity: 0.7;
+}
+
+.bouton-reagir:hover {
+  opacity: 1;
+}
+
+.mini-selecteur {
+  position: absolute;
+  margin-top: 4px;
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.mini-selecteur button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  padding: 2px;
+}
+
+.mini-selecteur button:hover {
+  transform: scale(1.2);
+}
+
+.indicateur-frappe {
+  padding: 0 22px 10px;
+  font-size: 0.78rem;
+  color: var(--texte-attenue);
+  font-style: italic;
+}
+
+/* ---- Sélecteur d'émojis (composition du message) ---- */
+.selecteur-emojis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 22px;
+  border-top: 1px solid var(--bordure);
+}
+
+.selecteur-emojis button {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 8px;
+  font-size: 1.15rem;
+  padding: 4px 8px;
+}
+
+.selecteur-emojis button:hover {
+  background: var(--accent-doux);
+  border-color: var(--accent);
+}
+
+.formulaire-message {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-top: 1px solid var(--bordure);
+  flex-shrink: 0;
+}
+
+.formulaire-message input[type='text'] {
+  flex: 1;
+  padding: 11px 14px;
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: 999px;
+  color: var(--texte);
+  font-size: 0.9rem;
+}
+
+.formulaire-message input[type='text']:focus {
+  outline: 2px solid var(--accent);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 720px) {
+  .corps {
+    flex-direction: column;
+  }
+  .panneau-tickets {
+    width: 100%;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--bordure);
+  }
+  .bulle {
+    max-width: 85%;
+  }
+}
+
+.appel-entrant-overlay {
+  display: none;
+}
+
+.appel-entrant-overlay.visible {
+  display: flex;
+}
+
+.overlay-appel.appel-entrant {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(11, 18, 32, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appel-entrant-contenu {
+  width: min(420px, 90vw);
+  padding: 24px;
+  background: var(--fond-panneau);
+  border: 1px solid var(--bordure);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.appel-entrant-titre {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.appel-entrant-texte {
+  margin: 0 0 20px;
+  color: var(--texte-attenue);
+}
+
+.appel-entrant-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.appel-entrant-actions .bouton-secondaire {
+  min-width: 120px;
+}
+
+/* ============================================================================
+   Module M4 — Overlay d'appel vidéo/audio (WebRTC via PeerJS)
+   ============================================================================ */
+
+.overlay-appel {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay-appel.mode-video .appel-audio-layout,
+.overlay-appel.mode-audio .appel-video-layout {
+  display: none;
+}
+
+.overlay-appel.mode-video .appel-video-layout,
+.overlay-appel.mode-audio .appel-audio-layout {
+  display: flex;
+}
+
+.appel-video-layout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.appel-audio-layout {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: radial-gradient(circle at top, rgba(232, 163, 61, 0.18), transparent 35%), #0b1220;
+}
+
+.audio-call-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 2rem 3rem;
+  border-radius: 24px;
+  background: rgba(16, 26, 44, 0.9);
+  border: 1px solid var(--bordure);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.audio-call-icone {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(232, 163, 61, 0.12);
+  border: 1px solid rgba(232, 163, 61, 0.3);
+  font-size: 2.3rem;
+}
+
+.audio-call-nom {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.audio-call-statut {
+  color: var(--texte-attenue);
+  font-size: 0.95rem;
+}
+
+.audio-barre {
+  width: min(600px, 90vw);
+  background: rgba(16, 26, 44, 0.94);
+  border: 1px solid var(--bordure);
+  border-radius: 18px;
+}
+
+.video-distante-conteneur {
+  position: relative;
+  flex: 1;
+  background: #05070c;
+  overflow: hidden;
+}
+
+#video-distante {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #05070c;
+}
+
+.video-locale {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  border-radius: 12px;
+  border: 2px solid var(--bordure);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: #000;
+}
+
+.indicateurs-distants {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.78rem;
+}
+
+.barre-appel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px;
+  background: var(--fond-panneau);
+  border-top: 1px solid var(--bordure);
+}
+
+.statut-appel {
+  color: var(--texte-attenue);
+  font-size: 0.85rem;
+}
+
+.chrono-appel {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.controles-appel {
+  display: flex;
+  gap: 12px;
+}
+
+.bouton-controle-appel {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+  color: var(--texte);
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bouton-controle-appel:hover {
+  border-color: var(--accent);
+}
+
+.bouton-controle-appel.raccrocher {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+  transform: rotate(135deg);
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(23, 48, 85, 0.95);
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  z-index: 110;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 1;
+}
+
+.toast.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.bulle-appel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(78%, 360px);
+  margin: 12px 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(23, 48, 85, 0.08);
+  border: 1px solid rgba(122, 137, 163, 0.18);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  color: var(--texte);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bulle-appel:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
+}
+
+.bulle-appel.appel-urgent {
+  background: rgba(220, 53, 69, 0.08);
+  border-color: rgba(220, 53, 69, 0.18);
+}
+
+.appel-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.appel-icone {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(65, 168, 116, 0.12);
+  font-size: 1.1rem;
+}
+
+.appel-titre-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.appel-titre {
+  font-weight: 700;
+  font-size: 0.96rem;
+}
+
+.appel-direction {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--texte-attenue);
+  font-size: 0.8rem;
+}
+
+.appel-flèche {
+  font-size: 1rem;
+  color: var(--accent);
+}
+
+.appel-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 44px;
+}
+
+.appel-heure,
+.appel-duree {
+  color: var(--texte-attenue);
+  font-size: 0.8rem;
+}
+
+.appel-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 44px;
+}
+
+.appel-rappeler {
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.appel-rappeler:hover {
+  filter: brightness(1.06);
+}
+
+.historique-appels,
+#historique-appels {
+  display: none !important;
+}
+

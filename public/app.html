@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sénégal Connect — Support client</title>
+<link rel="stylesheet" href="/css/app.css" />
+</head>
+<body class="page-app">
+
+  <header class="entete">
+    <div class="logo logo-petit">
+      <span class="logo-marque">Sénégal</span><span class="logo-accent">Connect</span>
+    </div>
+    <div class="info-utilisateur">
+      <span id="nom-utilisateur"></span>
+      <span id="role-utilisateur" class="badge-role"></span>
+      <button id="bouton-deconnexion" class="bouton-texte">Déconnexion</button>
+    </div>
+  </header>
+
+  <div class="corps">
+    <aside class="panneau-tickets">
+      <div class="panneau-entete">
+        <h2>Tickets</h2>
+        <button id="bouton-nouveau-ticket" class="bouton-icone" title="Nouveau ticket">+</button>
+      </div>
+
+      <form id="formulaire-nouveau-ticket" class="formulaire-inline" hidden>
+        <input type="text" id="champ-sujet-ticket" placeholder="Décrivez votre problème…" />
+        <button type="submit">Créer</button>
+      </form>
+
+      <ul id="liste-tickets" class="liste-tickets"></ul>
+    </aside>
+
+    <main class="panneau-chat">
+      <div id="chat-vide" class="chat-vide">
+        <p>Sélectionnez un ticket pour démarrer la conversation.</p>
+      </div>
+
+      <div id="chat-actif" class="chat-actif" hidden>
+        <div class="chat-entete">
+          <div>
+            <h3 id="chat-sujet"></h3>
+            <span id="chat-statut" class="badge-statut"></span>
+          </div>
+          <div class="chat-actions">
+            <button id="bouton-assigner" class="bouton-secondaire" hidden>Prendre en charge</button>
+            <button id="bouton-appel-audio" class="bouton-secondaire" title="Démarrer un appel audio">
+              📞 Appel audio
+            </button>
+            <button id="bouton-appel-video" class="bouton-secondaire" title="Démarrer un appel vidéo">
+              🎥 Appel vidéo
+            </button>
+            <button id="bouton-fermer-ticket" class="bouton-secondaire" hidden>Clôturer</button>
+          </div>
+        </div>
+
+        <div id="messages" class="messages"></div>
+        <div id="indicateur-frappe" class="indicateur-frappe" hidden></div>
+
+        <div id="selecteur-emojis" class="selecteur-emojis" hidden></div>
+
+        <form id="formulaire-message" class="formulaire-message">
+          <button type="button" id="bouton-emoji" class="bouton-icone" title="Émojis">🙂</button>
+          <label for="entree-fichier" class="bouton-icone" title="Joindre un fichier">📎</label>
+          <input type="file" id="entree-fichier" hidden accept=".jpg,.jpeg,.png,.pdf,.mp3,.wav,.ogg" />
+          <input type="text" id="champ-message" placeholder="Écrivez votre message…" autocomplete="off" />
+          <button type="submit" class="bouton-icone" title="Envoyer">➤</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Overlay d'appel vidéo/audio (module M4) -->
+  <div id="overlay-appel" class="overlay-appel mode-audio" hidden>
+    <div class="appel-video-layout">
+      <div class="video-distante-conteneur">
+        <video id="video-distante" autoplay playsinline></video>
+        <div id="indicateurs-distants" class="indicateurs-distants"></div>
+        <video id="video-locale" class="video-locale" autoplay playsinline muted></video>
+      </div>
+      <div class="barre-appel">
+        <span id="statut-appel" class="statut-appel">Appel en cours…</span>
+        <span id="chrono-appel" class="chrono-appel">00:00</span>
+        <div class="controles-appel">
+          <button type="button" id="bouton-micro" class="bouton-controle-appel" title="Micro">🎙️</button>
+          <button type="button" id="bouton-camera" class="bouton-controle-appel" title="Caméra">📷</button>
+          <button type="button" id="bouton-partage-ecran" class="bouton-controle-appel" title="Partager l'écran">🖥️</button>
+          <button type="button" id="bouton-raccrocher" class="bouton-controle-appel raccrocher" title="Raccrocher">📞</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="appel-audio-layout">
+      <div class="audio-call-card">
+        <div class="audio-call-icone">📞</div>
+        <div class="audio-call-nom">Appel audio</div>
+        <div id="audio-call-statut" class="audio-call-statut">Appel audio en cours…</div>
+      </div>
+      <div class="barre-appel audio-barre">
+        <span id="statut-appel-audio" class="statut-appel">Appel audio</span>
+        <span id="chrono-appel-audio" class="chrono-appel">00:00</span>
+        <div class="controles-appel controles-appel-audio">
+          <button type="button" id="bouton-micro-audio" class="bouton-controle-appel" title="Micro">🎙️</button>
+          <button type="button" id="bouton-raccrocher-audio" class="bouton-controle-appel raccrocher" title="Raccrocher">📞</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="appel-entrant-overlay" class="overlay-appel appel-entrant" hidden>
+    <div class="appel-entrant-contenu">
+      <p class="appel-entrant-titre"></p>
+      <p class="appel-entrant-texte"></p>
+      <div class="appel-entrant-actions">
+        <button id="bouton-accepter-appel" type="button" class="bouton-secondaire">Accepter</button>
+        <button id="bouton-refuser-appel" type="button" class="bouton-secondaire">Refuser</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <script src="/js/webrtc.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
