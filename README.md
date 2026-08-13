@@ -1,15 +1,31 @@
-# Sénégal Connect
+# 🇸🇳 Sénégal Connect
 
-API REST d'opérateur télécom avec support client en temps réel — Projet Fin de Module TCS L3, DSTI, Polytech Diamniadio (UAM).
+Sénégal Connect est une plateforme de gestion de support client permettant
+aux utilisateurs de contacter les agents, de gérer les tickets de support,
+d'échanger des messages en temps réel et de réaliser des appels audio/vidéo.
 
-## Description
-Sénégal Connect est une application de support client et de gestion télécom qui permet :
-- l'authentification des utilisateurs,
-- la gestion des clients et forfaits,
-- la gestion des factures et tickets,
-- le suivi des statistiques,
-- les appels en temps réel via WebRTC / PeerJS,
-- le support client avec Socket.IO.
+## Fonctionnalités
+
+- Gestion des utilisateurs et clients
+- Authentification JWT
+- Gestion des forfaits
+- Gestion des factures
+- Gestion des tickets
+- Chat support en temps réel avec Socket.IO
+- Appels audio avec WebRTC
+- Appels vidéo avec WebRTC
+- Partage d'écran
+- Historique des appels
+- API REST
+- Documentation Swagger
+- PostgreSQL
+
+## Architecture
+
+- M1 : API REST & PostgreSQL — Gestion métier
+- M2 : Authentification JWT & Sécurité
+- M3 : Support Client Temps Réel — Socket.IO
+- M4 : Support Vidéo — PeerJS + WebRTC + Partage d'écran
 
 ## Prérequis
 - Node.js 20
