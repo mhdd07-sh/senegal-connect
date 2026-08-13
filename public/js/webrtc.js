@@ -53,17 +53,33 @@ const SupportWebRTC = (() => {
   }
 
   function updateCallModeUI(type = 'audio') {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
     const isVideoCall = type === 'video';
     const overlay = document.getElementById('overlay-appel');
     const cameraBtn = document.getElementById('bouton-camera');
     const screenBtn = document.getElementById('bouton-partage-ecran');
     const videoLocale = document.getElementById('video-locale');
     const videoDistante = document.getElementById('video-distante');
-    const controles = document.querySelector('.controles-appel');
+    const controles = typeof document.querySelector === 'function'
+      ? document.querySelector('.controles-appel')
+      : null;
 
-    if (overlay) {
-      overlay.classList.toggle('mode-video', isVideoCall);
-      overlay.classList.toggle('mode-audio', !isVideoCall);
+    if (overlay && overlay.classList) {
+      if (typeof overlay.classList.toggle === 'function') {
+        overlay.classList.toggle('mode-video', isVideoCall);
+        overlay.classList.toggle('mode-audio', !isVideoCall);
+      } else {
+        if (isVideoCall) {
+          overlay.classList.add('mode-video');
+          overlay.classList.remove('mode-audio');
+        } else {
+          overlay.classList.remove('mode-video');
+          overlay.classList.add('mode-audio');
+        }
+      }
     }
 
     if (cameraBtn) {

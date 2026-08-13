@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,68 +94,68 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const multer = <span class="cstat-no" title="statement not covered" >require('multer');</span>
-const path = <span class="cstat-no" title="statement not covered" >require('path');</span>
-const { v4: uuidv4 } = <span class="cstat-no" title="statement not covered" >require('uuid');</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 &nbsp;
 // Types autorisés par le cahier des charges : images, PDF, audio.
-const TYPES_AUTORISES = <span class="cstat-no" title="statement not covered" >['image/jpeg', 'image/png', 'application/pdf', 'audio/mpeg', 'audio/wav', 'audio/ogg'];</span>
+const TYPES_AUTORISES = ['image/jpeg', 'image/png', 'application/pdf', 'audio/mpeg', 'audio/wav', 'audio/ogg'];
 &nbsp;
-const stockage = <span class="cstat-no" title="statement not covered" >multer.diskStorage({</span>
-  destination: <span class="fstat-no" title="function not covered" >(r</span>eq, file, cb) =&gt; <span class="cstat-no" title="statement not covered" >cb(null, 'uploads/'),</span>
-  filename: <span class="fstat-no" title="function not covered" >(r</span>eq, file, cb) =&gt; {
+const stockage = multer.diskStorage({
+  destination: (req, file, cb) =&gt; cb(null, 'uploads/'),
+  filename: (req, file, cb) =&gt; {
     // Nom de fichier généré en UUID + extension d'origine — jamais le nom fourni par le client.
-    const extension = <span class="cstat-no" title="statement not covered" >path.extname(file.originalname);</span>
-<span class="cstat-no" title="statement not covered" >    cb(null, `${uuidv4()}${extension}`);</span>
+    const extension = path.extname(file.originalname);
+    cb(null, `${uuidv4()}${extension}`);
   },
 });
 &nbsp;
-function <span class="fstat-no" title="function not covered" >filtreFichier(</span>req, file, cb) {
-<span class="cstat-no" title="statement not covered" >  if (TYPES_AUTORISES.includes(file.mimetype)) {</span>
-<span class="cstat-no" title="statement not covered" >    cb(null, true);</span>
+function filtreFichier(req, file, cb) {
+  if (TYPES_AUTORISES.includes(file.mimetype)) {
+    cb(null, true);
   } else {
-<span class="cstat-no" title="statement not covered" >    cb(new Error(`Type de fichier non autorisé : ${file.mimetype}`));</span>
+    cb(new Error(`Type de fichier non autorisé : ${file.mimetype}`));
   }
 }
 &nbsp;
-const upload = <span class="cstat-no" title="statement not covered" >multer({</span>
+const upload = multer({
   storage: stockage,
   fileFilter: filtreFichier,
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE, 10) || 10 * 1024 * 1024 }, // 10 Mo par défaut
+  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE, 10) || <span class="branch-1 cbranch-no" title="branch not covered" >10 * 1024 * 1024 </span>}, // 10 Mo par défaut
 });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = upload;</span>
+module.exports = upload;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -163,7 +163,7 @@ const upload = <span class="cstat-no" title="statement not covered" >multer({</s
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-08-08T11:57:28.424Z
+                at 2026-08-13T13:08:44.611Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
