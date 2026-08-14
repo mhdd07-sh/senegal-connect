@@ -15,7 +15,7 @@ services:
       DB_PORT: 5432
       DB_NAME: senegal_connect
       DB_USER: postgres
-      DB_PASS: change_this_password
+      DB_PASS: password
       PORT: 3001
       PEERJS_PORT: 9001
     volumes:
@@ -32,7 +32,7 @@ services:
     environment:
       POSTGRES_DB: senegal_connect
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mhddiene
+      POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
