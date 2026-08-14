@@ -14,6 +14,6 @@ EXPOSE 3000
 EXPOSE 9001
 
 HEALTHCHECK --interval=30s --timeout=5s \
-  CMD wget -qO- http://localhost:3000/api/health || exit 1
+  CMD wget -qO- http://localhost:3001/api/health || exit 1
 
 CMD ["node", "src/server.js"]

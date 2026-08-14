@@ -5,7 +5,7 @@ services:
     build: .
     container_name: senegal-connect-api
     ports:
-      - "3000:3000"
+      - "3001:3001"
       - "9001:9001"
     env_file:
       - .env
@@ -15,8 +15,8 @@ services:
       DB_PORT: 5432
       DB_NAME: senegal_connect
       DB_USER: postgres
-      DB_PASS: mhddiene
-      PORT: 3000
+      DB_PASS: change_this_password
+      PORT: 3001
       PEERJS_PORT: 9001
     volumes:
       - ./uploads:/app/uploads
@@ -44,6 +44,7 @@ services:
       timeout: 5s
       retries: 10
     restart: unless-stopped
+
 
 volumes:
   pgdata:

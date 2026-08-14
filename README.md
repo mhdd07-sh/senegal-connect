@@ -88,13 +88,13 @@ docker compose logs -f
 ```bash
 npm test
 npm run test:cov
-curl http://localhost:3000/api/health
+curl http://localhost:3001/api/health
 ```
 
 ## Documentation API
 Swagger UI :
 ```text
-http://localhost:3000/api/docs
+http://localhost:3001/api/docs
 ```
 
 ## Sécurité
