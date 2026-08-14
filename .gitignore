@@ -1,0 +1,10 @@
+.env
+node_modules/
+logs/*.log
+scripts/
+package.lock.json/
+package.json/
+.dockerignore/
+.gitignore/
+coverage/
+.vscode/
